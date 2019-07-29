@@ -1,6 +1,8 @@
-package com.example.core.config.mvc;
+package com.example;
 
 import com.example.core.filter.Interceptor;
+import com.example.core.filter.LogFilter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ResourceUtils;
@@ -23,6 +25,15 @@ public class MvcConfig implements WebMvcConfigurer {
     public Interceptor interceptor() {
         return new Interceptor();
     }
+
+    @Bean
+    public FilterRegistrationBean registrationBean(LogFilter filter) {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
+        //重复执行filter让其执行一次
+        registrationBean.setEnabled(false);
+        return registrationBean;
+    }
+
 
     @Bean
     public InternalResourceViewResolver viewResolver() {

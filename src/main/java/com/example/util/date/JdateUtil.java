@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.util.date;
 
 import jodd.datetime.JDateTime;
 import org.slf4j.Logger;
