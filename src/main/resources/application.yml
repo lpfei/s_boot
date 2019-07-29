@@ -1,0 +1,32 @@
+server:
+  servlet:
+    context-path: /
+#dev | prod
+spring:
+  profiles:
+    active: dev
+    # jdbc_config   datasource
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.97.225.44:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      username: java_usr
+      password: javaUsrPassword@7
+      minimum-idle: 8
+      maximum-pool-size: 20
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  resources: classpath:/WEB-INF/resources/
+#mybatis
+mybatis-plus:
+  #xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+  mapper-locations: classpath*:/mapper/*.xml
+  global-config:
+      db-config:
+        id-type: auto
+        #表名下划线命名默认true
+        table-underline: true
+
+

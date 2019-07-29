@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+<body>
+<!-- Fixed navbar -->
+<div class="navbar navbar-fixed-top" id="nav" role="navigation">
+    <!--<div class="theme-switcher">
+        <div class="colors">
+            <a href="javascript:void(0)" class="blue"></a>
+            <a href="javascript:void(0)" class="orange"></a>
+            <a href="javascript:void(0)" class="red"></a>
+        </div>
+        <a href="javascript:void(0)" class="Switcher"><span class="fa fa-pencil fa-lg"></span></a>
+    </div>-->
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img th:src="@{/static/btzero/img/logo-blue.png}" alt=""/>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/home}">Home</a></li>
+                <li><a href="#">about</a></li>
+                <li><a href="#">services</a></li>
+                <li><a href="#">team</a></li>
+                <li><a href="#">our work</a></li>
+                <li><a href="#">contact</a></li>
+                <li><a th:href="@{/blog}" class="active">blog</a></li>
+                <li class="social-nav">
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!--/.container -->
+</div>
+<!--/.navbar -->
+</body>
+</html>
