@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * Created by lpfei on 2019/7/30
  */
 @Data
-@ConfigurationProperties("api")
+@ConfigurationProperties("app")
 @Component
 public class AppProperties {
     /**

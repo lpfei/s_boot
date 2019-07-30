@@ -27,5 +27,5 @@ mybatis-plus:
         id-type: auto
         table-underline: true
 
-api:
+app:
   docDisabled: false

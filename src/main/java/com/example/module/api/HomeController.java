@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Api(value = "首页", tags = "首页")
 public class HomeController {
+
     /**
      * 跳转首页
      *
