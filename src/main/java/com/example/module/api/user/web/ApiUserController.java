@@ -1,5 +1,6 @@
 package com.example.module.api.user.web;
 
+import com.example.core.result.ApiResult;
 import com.example.core.result.BaseResponse;
 import com.example.module.api.user.service.ApiUserService;
 import com.example.module.model.params.req.Demo;
@@ -30,7 +31,7 @@ public class ApiUserController {
 
     @PostMapping(value = "user")
     public Object user(@RequestBody @Valid Demo demo) {
-        return BaseResponse.ok(1);
+        return ApiResult.ok();
     }
 
 }

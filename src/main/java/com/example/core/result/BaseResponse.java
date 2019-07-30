@@ -66,6 +66,7 @@ public class BaseResponse<T> {
         return ok(message, null);
     }
 
+
     /**
      * Creates an ok result with data only. (Default message is OK, status is 200)
      *
@@ -75,5 +76,10 @@ public class BaseResponse<T> {
      */
     public static <T> BaseResponse<T> ok(@NonNull T data) {
         return new BaseResponse<>(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase(), data);
+    }
+
+    @NonNull
+    public static <T> BaseResponse<T> ok() {
+        return ok("处理成功", null);
     }
 }
