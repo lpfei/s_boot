@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.core.util;
 
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;

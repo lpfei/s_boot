@@ -1,11 +1,11 @@
-package com.example.module.api.user.web;
+package com.example.module.api;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  * @Author: lpfei.
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @Slf4j
+@Api(value = "首页", tags = "首页")
 public class HomeController {
-
-
     /**
      * 跳转首页
      *
      * @return
      */
-    @RequestMapping(value = {"/", "home"})
+    @GetMapping(value = {"/", "home"})
+    @ApiOperation(value = "首页", notes = "首页")
     public String home(Model model) {
         model.addAttribute("test", "---------------");
         return "btzero/index";
@@ -34,7 +34,7 @@ public class HomeController {
      *
      * @return
      */
-    @RequestMapping(value = "blog")
+    @GetMapping(value = "blog")
     public String blog() {
         return "btzero/blog-archive";
     }
@@ -44,7 +44,7 @@ public class HomeController {
      *
      * @return
      */
-    @RequestMapping(value = "single")
+    @GetMapping(value = "single")
     public String single() {
         return "btzero/blog-single";
     }

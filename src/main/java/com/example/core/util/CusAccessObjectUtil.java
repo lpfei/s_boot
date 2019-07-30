@@ -1,4 +1,4 @@
-package com.example.util;
+package com.example.core.util;
 
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.UserAgent;
