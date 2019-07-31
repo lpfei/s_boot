@@ -6,6 +6,7 @@ import com.example.module.api.user.service.ApiUserService;
 import com.example.module.model.params.req.Demo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +34,8 @@ public class ApiUserController {
     public Object user(@RequestBody @Valid Demo demo) {
         return ApiResult.ok();
     }
-
+    @PostMapping(value = "user2")
+    public Object user2(@RequestBody @Valid Demo demo, BindingResult bindingResult) {
+        return ApiResult.ok();
+    }
 }

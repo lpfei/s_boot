@@ -4,6 +4,7 @@ import com.example.core.exception.BaseException;
 import com.example.core.result.BaseResponse;
 import com.example.core.util.ExceptionUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.HibernateValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
@@ -57,8 +58,16 @@ public class ControllerExceptionHandler {
     }
 
     /**
+     *  ----------------------HibernateValidator 全局校验处理方式 1--------------------------------------
+     *  根据HibernateValidator校验未通过抛出的异常处理响应
+     *  ----------------------HibernateValidator 全局校验处理方式 2--------------------------------------
+     *  ControllerValidatorInterceptor 类切面处理
+     */
+
+
+    /**
      * HibernateValidator 校验未通过处理@requestBody
-     *
+     * @requestBody 抛出MethodArgumentNotValidException
      * @param ex
      * @param <T>
      * @return
@@ -78,7 +87,7 @@ public class ControllerExceptionHandler {
 
     /**
      * HibernateValidator 校验未通过处理@Validated
-     *
+     * @requestParam 抛出ConstraintViolationException
      * @param ex
      * @param <T>
      * @return

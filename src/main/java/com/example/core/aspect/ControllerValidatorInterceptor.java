@@ -10,14 +10,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 /**
- * description:
+ * description: 切面全局处理HibernateValidator
  * Created by lpfei on 2019/7/30
  */
-@Component
 @Aspect
+@Component
 public class ControllerValidatorInterceptor {
 
-    /*@Around("execution(* com.example.module.api.user.web.*(..)) && args(..,bindingResult)")
+    /**
+     * @param pjp
+     * @param BindingResult bindingResult
+     * @return
+     * @throws Throwable
+     */
+    @Around("execution(* com.example.module.api.*.web.*.*(..)) && args(..,bindingResult)")
     public Object doAround(ProceedingJoinPoint pjp, BindingResult bindingResult) throws Throwable {
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
@@ -25,5 +31,5 @@ public class ControllerValidatorInterceptor {
             }
         }
         return pjp.proceed();
-    }*/
+    }
 }
