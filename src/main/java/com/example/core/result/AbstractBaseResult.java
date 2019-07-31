@@ -29,8 +29,6 @@ public abstract class AbstractBaseResult<T> {
      */
     protected T data;
 
-    protected Integer code;
-
     public AbstractBaseResult(Integer status, String message, T data) {
         this.status = status;
         this.message = message;

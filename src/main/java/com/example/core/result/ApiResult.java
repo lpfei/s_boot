@@ -1,6 +1,5 @@
 package com.example.core.result;
 
-import com.example.core.enums.RequestStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -16,20 +15,11 @@ public class ApiResult<T> extends AbstractBaseResult<T> {
         this.status = build.status;
         this.message = build.message;
         this.data = (T) build.data;
-        this.code = build.code;
-    }
-
-    public ApiResult() {
-    }
-
-    public ApiResult(Integer isSuccess, Integer status, String message, T data) {
-        super(status, message, data);
-        this.code = isSuccess;
     }
 
     @NonNull
     public static <T> ApiResult<T> ok(@Nullable String message, @Nullable T data) {
-        return new Builder<T>().isSuccess(RequestStatus.SUCCESS.getValue()).status(HttpStatus.OK.value()).message(message).data(data).build();
+        return new Builder<T>().status(HttpStatus.OK.value()).message(message).data(data).build();
     }
 
     @NonNull
@@ -49,7 +39,7 @@ public class ApiResult<T> extends AbstractBaseResult<T> {
 
     @NonNull
     public static <T> ApiResult<T> error(@Nullable Integer status, @Nullable String message, @Nullable T data) {
-        return new Builder<T>().isSuccess(RequestStatus.FAIL.getValue()).status(status).message(message).data(data).build();
+        return new Builder<T>().status(status).message(message).data(data).build();
     }
 
     @NonNull
@@ -81,8 +71,6 @@ public class ApiResult<T> extends AbstractBaseResult<T> {
 
         private T data;
 
-        private Integer code;
-
         public Builder() {
         }
 
@@ -98,11 +86,6 @@ public class ApiResult<T> extends AbstractBaseResult<T> {
 
         public Builder data(T val) {
             this.data = val;
-            return this;
-        }
-
-        public Builder isSuccess(Integer val) {
-            this.code = val;
             return this;
         }
 
