@@ -27,7 +27,9 @@ public class ControllerValidatorInterceptor {
     public Object doAround(ProceedingJoinPoint pjp, BindingResult bindingResult) throws Throwable {
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
-                return new BaseResponse(HttpStatus.PRECONDITION_FAILED.value(), error.getDefaultMessage(), null);
+                BaseResponse baseResponse = BaseResponse.fail(error.getDefaultMessage());
+                baseResponse.setStatus(HttpStatus.BAD_REQUEST.value());
+                return baseResponse;
             }
         }
         return pjp.proceed();

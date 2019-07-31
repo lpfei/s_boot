@@ -132,7 +132,7 @@
 
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
-        <logger name="com.example" level="debug"/>
+        <logger name="com.example" level="info"/>
     </springProfile>
     <!--生产环境-->
     <springProfile name="pro">

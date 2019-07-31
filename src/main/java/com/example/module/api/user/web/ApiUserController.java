@@ -1,7 +1,6 @@
 package com.example.module.api.user.web;
 
 import com.example.core.result.ApiResult;
-import com.example.core.result.BaseResponse;
 import com.example.module.api.user.service.ApiUserService;
 import com.example.module.model.params.req.Demo;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +25,17 @@ public class ApiUserController {
     ApiUserService apiUserService;
 
     @PostMapping(value = "test")
-    public void test() {
-        apiUserService.test();
+    public ApiResult test() {
+        return apiUserService.test();
     }
 
     @PostMapping(value = "user")
-    public Object user(@RequestBody @Valid Demo demo) {
-        return ApiResult.ok();
+    public ApiResult<Demo> user(@RequestBody @Valid Demo demo) {
+        return ApiResult.ok(demo);
     }
+
     @PostMapping(value = "user2")
-    public Object user2(@RequestBody @Valid Demo demo, BindingResult bindingResult) {
-        return ApiResult.ok();
+    public Demo user2(@RequestBody @Valid Demo demo, BindingResult bindingResult) {
+        return demo;
     }
 }

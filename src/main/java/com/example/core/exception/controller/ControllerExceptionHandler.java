@@ -49,8 +49,7 @@ public class ControllerExceptionHandler {
     private <T> BaseResponse<T> handleBaseException(Throwable t) {
         Assert.notNull(t, "Throwable must not be null");
         log.error("Captured an exception", t);
-        BaseResponse<T> baseResponse = new BaseResponse<>();
-        baseResponse.setMessage(t.getMessage());
+        BaseResponse<T> baseResponse = BaseResponse.fail(t.getMessage());
         if (log.isDebugEnabled()) {
             baseResponse.setDevMessage(ExceptionUtils.getStackTrace(t));
         }
@@ -67,39 +66,45 @@ public class ControllerExceptionHandler {
 
     /**
      * HibernateValidator 校验未通过处理@requestBody
-     * @requestBody 抛出MethodArgumentNotValidException
+     *
      * @param ex
      * @param <T>
      * @return
+     * @requestBody 抛出MethodArgumentNotValidException
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> BaseResponse<T> validationErrorHandler(MethodArgumentNotValidException ex) {
         // 同样是获取BindingResult对象，然后获取其中的错误信息
         // 如果前面开启了fail_fast，事实上这里只会有一个信息
-        //如果没有，则可能又多个
+        // 如果没有，则可能又多个
         List<String> errorInformation = ex.getBindingResult().getAllErrors()
                 .stream()
                 .map(ObjectError::getDefaultMessage)
                 .collect(Collectors.toList());
-        return new BaseResponse(HttpStatus.PRECONDITION_FAILED.value(), errorInformation.toString(), null);
+        BaseResponse baseResponse = handleBaseException(ex);
+        baseResponse.setMessage(errorInformation.toString());
+        return baseResponse;
     }
 
     /**
      * HibernateValidator 校验未通过处理@Validated
-     * @requestParam 抛出ConstraintViolationException
+     *
      * @param ex
      * @param <T>
      * @return
+     * @requestParam 抛出ConstraintViolationException
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> BaseResponse<T> validationErrorHandler(ConstraintViolationException ex) {
         List<String> errorInformation = ex.getConstraintViolations()
                 .stream()
                 .map(ConstraintViolation::getMessage)
                 .collect(Collectors.toList());
-        return new BaseResponse(HttpStatus.PRECONDITION_FAILED.value(), errorInformation.toString(), null);
+        BaseResponse baseResponse = handleBaseException(ex);
+        baseResponse.setMessage(errorInformation.toString());
+        return baseResponse;
     }
 }
 

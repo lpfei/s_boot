@@ -1,6 +1,6 @@
 package com.example.module.api.user.service;
 
-import com.example.core.exception.ServiceException;
+import com.example.core.result.ApiResult;
 import com.example.module.ag.user.service.SysUserService;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ApiUserService extends SysUserService {
-    public void test() {
-        throw new ServiceException("ceshi");
+
+    public ApiResult test() {
+        return ApiResult.error();
     }
 }
