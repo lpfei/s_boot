@@ -17,7 +17,7 @@ import java.io.IOException;
  * Created by lpfei on 2019/8/1
  */
 @Component
-@WebFilter
+@WebFilter(filterName = "xssFilter", urlPatterns = "/*", asyncSupported = true)
 public class XssFilter implements Filter {
 
     @Override
