@@ -31,6 +31,7 @@ public class ApiUserController {
 
     @PostMapping(value = "user")
     public ApiResult<Demo> user(@RequestBody @Valid Demo demo) {
+        log.info("test");
         return ApiResult.ok(demo);
     }
 

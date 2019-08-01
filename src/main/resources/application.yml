@@ -21,6 +21,8 @@ spring:
   resources: classpath:/WEB-INF/resources/
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
+  application:
+    name: springboot
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
@@ -29,5 +31,7 @@ mybatis-plus:
         id-type: auto
         table-underline: true
 
+#常量
 app:
   docDisabled: false
+
