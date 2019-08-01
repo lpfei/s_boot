@@ -19,6 +19,7 @@ import java.io.IOException;
 @Component
 @WebFilter
 public class XssFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
@@ -35,7 +36,10 @@ public class XssFilter implements Filter {
     }
 
     /**
-     * 过滤json类型的 * @param builder * @return
+     * 过滤json类型的
+     *
+     * @param builder
+     * @return
      */
     @Bean
     @Primary
