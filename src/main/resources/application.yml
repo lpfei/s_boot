@@ -19,6 +19,8 @@ spring:
       connection-timeout: 30000
       connection-test-query: SELECT 1
   resources: classpath:/WEB-INF/resources/
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
