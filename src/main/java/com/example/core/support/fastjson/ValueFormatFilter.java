@@ -1,4 +1,4 @@
-package com.example.core.filter;
+package com.example.core.support.fastjson;
 
 import com.alibaba.fastjson.serializer.ValueFilter;
 import com.example.core.enums.DatePattern;
