@@ -2,7 +2,7 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <springProperty scope="context" name="springAppName" source="spring.application.name"/>
-    <property name="LOG_HOME" value="/logs/${springAppName}"/>
+    <property name="LOG_HOME" value="logs/${springAppName}"/>
     <!--日志每天生产一个文件-->
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
