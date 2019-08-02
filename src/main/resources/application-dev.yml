@@ -1,7 +1,7 @@
 spring:
     # jdbc_config   datasource
     datasource:
-      url: jdbc:mysql://39.97.225.44:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      url: jdbc:p6spy:mysql://39.97.225.44:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       hikari:
         username: java_usr
         password: javaUsrPassword@7
@@ -10,9 +10,8 @@ spring:
         max-lifetime: 1800000
         connection-timeout: 30000
 mybatis-plus:
-    #项目启动会检查xml配置存在(只在开发时候打开)
     check-config-location: true
-    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    #sql log
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8080

@@ -7,13 +7,14 @@ spring:
     active: dev
     # jdbc_config   datasource
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://39.97.225.44:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://39.97.225.44:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       username: java_usr
       password: javaUsrPassword@7
-      minimum-idle: 8
+      minimum-idle: 10
       maximum-pool-size: 20
       max-lifetime: 1800000
       connection-timeout: 30000
@@ -31,7 +32,6 @@ mybatis-plus:
         id-type: auto
         table-underline: true
 
-#常量
 app:
   docDisabled: false
 
