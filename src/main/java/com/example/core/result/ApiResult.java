@@ -53,6 +53,11 @@ public class ApiResult<T> extends AbstractBaseResult<T> {
     }
 
     @NonNull
+    public static ApiResult error(@Nullable String message) {
+        return error(message, null);
+    }
+
+    @NonNull
     public static ApiResult error() {
         return error("处理失败", null);
     }

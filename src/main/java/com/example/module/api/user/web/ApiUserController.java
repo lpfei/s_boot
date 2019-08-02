@@ -36,7 +36,7 @@ public class ApiUserController {
     }
 
     @PostMapping(value = "user2")
-    public Demo user2(@RequestBody @Valid Demo demo, BindingResult bindingResult) {
-        return demo;
+    public ApiResult<Demo> user2(@RequestBody @Valid Demo demo, BindingResult bindingResult) {
+        return ApiResult.ok(demo);
     }
 }

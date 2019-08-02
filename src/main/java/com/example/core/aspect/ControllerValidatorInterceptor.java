@@ -1,5 +1,6 @@
 package com.example.core.aspect;
 
+import com.example.core.result.ApiResult;
 import com.example.core.result.BaseResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -18,6 +19,8 @@ import org.springframework.validation.ObjectError;
 public class ControllerValidatorInterceptor {
 
     /**
+     * 仅作demo使用
+     *
      * @param pjp
      * @param BindingResult bindingResult
      * @return
@@ -27,9 +30,8 @@ public class ControllerValidatorInterceptor {
     public Object doAround(ProceedingJoinPoint pjp, BindingResult bindingResult) throws Throwable {
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
-                BaseResponse baseResponse = BaseResponse.fail(error.getDefaultMessage());
-                baseResponse.setStatus(HttpStatus.BAD_REQUEST.value());
-                return baseResponse;
+                ApiResult apiResult = ApiResult.error(error.getDefaultMessage());
+                return apiResult;
             }
         }
         return pjp.proceed();
