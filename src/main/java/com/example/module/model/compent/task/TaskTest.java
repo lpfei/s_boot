@@ -1,4 +1,4 @@
-package com.example.module.task;
+package com.example.module.model.compent.task;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
