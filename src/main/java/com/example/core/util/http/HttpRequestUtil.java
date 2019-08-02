@@ -1,4 +1,4 @@
-package com.example.core.util;
+package com.example.core.util.http;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

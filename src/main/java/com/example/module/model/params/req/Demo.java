@@ -25,7 +25,7 @@ public class Demo {
     @ApiModelProperty(value = "身份证号")
     private String idCardNo;
 
-    //    @NotEmpty
+    @NotEmpty(message = "密码不能为空")
     @ApiModelProperty(value = "密码")
     private String passWd;
 

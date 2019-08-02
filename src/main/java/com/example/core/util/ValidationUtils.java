@@ -10,6 +10,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Object validation utilities.
@@ -96,5 +97,27 @@ public class ValidationUtils {
         Map<String, String> errMap = new HashMap<>(4);
         fieldErrors.forEach(filedError -> errMap.put(filedError.getField(), filedError.getDefaultMessage()));
         return errMap;
+    }
+
+    @NonNull
+    public static String stringWithValidError(Set<ConstraintViolation<?>> constraintViolations) {
+        if (CollectionUtils.isEmpty(constraintViolations)) {
+            return "";
+        }
+        AtomicReference<String> res = new AtomicReference<>("");
+        // Format the error message
+        constraintViolations.forEach(
+                constraintViolation ->
+                        res.set(constraintViolation.getPropertyPath().toString() + constraintViolation.getMessage()));
+        return res.get();
+    }
+
+    public static String stringWithFieldError(@Nullable List<FieldError> fieldErrors) {
+        if (CollectionUtils.isEmpty(fieldErrors)) {
+            return "";
+        }
+        AtomicReference<String> res = new AtomicReference<>("");
+        fieldErrors.forEach(filedError -> res.set("参数有误: " + filedError.getDefaultMessage()));
+        return res.get();
     }
 }
