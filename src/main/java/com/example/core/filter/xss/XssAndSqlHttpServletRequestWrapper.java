@@ -1,14 +1,14 @@
 package com.example.core.filter.xss;
 
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.text.StringEscapeUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * description:防止xss攻击
+ * description:防止xss攻击,sql注入
  * Created by lpfei on 2019/8/1
  */
 public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrapper {
@@ -23,7 +23,8 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
     public String getParameter(String name) {
         String value = request.getParameter(name);
         if (!StringUtils.isEmpty(value)) {
-            value = StringEscapeUtils.escapeHtml4(value);
+            value = org.apache.commons.text.StringEscapeUtils.escapeHtml4(value);
+            value = StringEscapeUtils.escapeSql(value);
         }
         return value;
     }
@@ -36,7 +37,8 @@ public class XssAndSqlHttpServletRequestWrapper extends HttpServletRequestWrappe
         }
         for (int i = 0; i < parameterValues.length; i++) {
             String value = parameterValues[i];
-            parameterValues[i] = StringEscapeUtils.escapeHtml4(value);
+            parameterValues[i] = org.apache.commons.text.StringEscapeUtils.escapeHtml4(value);
+            parameterValues[i] = StringEscapeUtils.escapeSql(value);
         }
         return parameterValues;
     }
