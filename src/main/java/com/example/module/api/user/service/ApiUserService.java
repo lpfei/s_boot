@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class ApiUserService extends SysUserService {
 
     public ApiResult test() {
+        this.list();
         return ApiResult.error();
     }
 }

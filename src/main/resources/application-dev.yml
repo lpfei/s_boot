@@ -12,6 +12,6 @@ spring:
 mybatis-plus:
     check-config-location: true
     #sql log
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 server:
   port: 8080

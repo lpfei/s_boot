@@ -18,7 +18,7 @@ spring:
       maximum-pool-size: 20
       max-lifetime: 1800000
       connection-timeout: 30000
-      connection-test-query: SELECT 1
+#      connection-test-query: SELECT 1
   resources: classpath:/WEB-INF/resources/
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
