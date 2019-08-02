@@ -1,5 +1,6 @@
 package com.example.core.config;
 
+import com.example.core.factory.StringToEnumConverterFactory;
 import com.example.core.filter.Interceptor;
 import com.example.core.filter.LogFilter;
 import com.example.core.properties.AppProperties;
@@ -8,6 +9,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -87,5 +89,10 @@ public class WebMvcAutoConfiguration implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         /*请求方法index跳转到index页面*/
         registry.addViewController("home").setViewName("index");
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addConverterFactory(new StringToEnumConverterFactory());
     }
 }
