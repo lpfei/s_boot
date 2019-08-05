@@ -2,8 +2,10 @@ package com.example.module.api.user.web;
 
 import com.example.core.result.ApiResult;
 import com.example.module.api.user.service.ApiUserService;
+import com.example.module.model.compent.quartz.bean.OneJob;
 import com.example.module.model.params.req.Demo;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +25,8 @@ import javax.validation.Valid;
 public class ApiUserController {
     @Autowired
     ApiUserService apiUserService;
+    @Autowired
+    private OneJob oneJob;
 
     @PostMapping(value = "test")
     public ApiResult test() {
@@ -38,5 +42,12 @@ public class ApiUserController {
     @PostMapping(value = "user2")
     public ApiResult<Demo> user2(@RequestBody @Valid Demo demo, BindingResult bindingResult) {
         return ApiResult.ok(demo);
+    }
+
+
+    @PostMapping(value = "testq")
+    public ApiResult quartzTest() throws SchedulerException {
+        oneJob.addJob("one", "one", 10,null);
+        return ApiResult.ok();
     }
 }
