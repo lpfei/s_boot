@@ -1,6 +1,7 @@
 package com.example.module.api.user.web;
 
 import com.example.core.result.ApiResult;
+import com.example.core.support.spring.quartz.QuartzManager;
 import com.example.module.api.user.service.ApiUserService;
 import com.example.module.model.compent.quartz.bean.OneJob;
 import com.example.module.model.params.req.Demo;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 
 /**
  * description:
@@ -26,7 +28,7 @@ public class ApiUserController {
     @Autowired
     ApiUserService apiUserService;
     @Autowired
-    private OneJob oneJob;
+    private QuartzManager quartzManager;
 
     @PostMapping(value = "test")
     public ApiResult test() {
@@ -47,7 +49,8 @@ public class ApiUserController {
 
     @PostMapping(value = "testq")
     public ApiResult quartzTest() throws SchedulerException {
-        oneJob.addJob("one", "one", 10,null);
+        String param = "1";
+        quartzManager.addJob(OneJob.class, "one_" + param, "one", 10, new HashMap());
         return ApiResult.ok();
     }
 }
