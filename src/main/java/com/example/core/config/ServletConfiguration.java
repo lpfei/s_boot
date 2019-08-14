@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ServletComponentScan("com.example.**")
-public class ServletConfig {
+public class ServletConfiguration {
 }

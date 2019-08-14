@@ -9,5 +9,5 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @MapperScan("com.example.**.mapper")
-public class MybatisPlusConfig {
+public class MybatisPlusConfiguration {
 }

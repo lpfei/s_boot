@@ -1,4 +1,4 @@
-package com.example.module.model.compent;
+package com.example.module.model.compent.webSocket;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
