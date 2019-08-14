@@ -2,6 +2,10 @@ package com.example.module.api;
 
 import com.example.core.result.ApiResult;
 import com.example.core.support.spring.quartz.QuartzManager;
+import com.example.module.ag.admin.entity.SysRole2;
+import com.example.module.ag.admin.entity.SysUser2;
+import com.example.module.ag.admin.service.SysRole2Service;
+import com.example.module.api.admin.JpaSysUser2Service;
 import com.example.module.model.compent.quartz.bean.OneJob;
 import com.example.module.model.params.req.Demo;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,10 @@ public class DemoController {
 
     @Autowired
     private QuartzManager quartzManager;
+    @Autowired
+    private JpaSysUser2Service jpaSysUser2Service;
+    @Autowired
+    SysRole2Service sysRole2Service;
 
     /**
      * HibernateValidator test
@@ -82,9 +90,36 @@ public class DemoController {
         return ApiResult.ok();
     }
 
+    /**
+     * 验证权限 test
+     * 触发doGetAuthorizationInfo,授权逻辑
+     *
+     * @return
+     */
     @PostMapping(value = "permission")
     @RequiresRoles({"admin"})
     public Object permission() {
+        return ApiResult.ok();
+    }
+
+
+    /**
+     * jpa 级联操作用户-角色
+     *
+     * @return
+     */
+    @PostMapping(value = "relation")
+    @RequiresUser
+    public Object relation() {
+        SysUser2 sysUser2 = new SysUser2();
+        sysUser2.setId(2);
+        sysUser2.setUserName("admin");
+        SysRole2 sysRole2 = new SysRole2();
+        sysRole2.setId(2);
+        sysRole2.setRole("11");
+
+        sysUser2.getRoleList().add(sysRole2);
+        jpaSysUser2Service.save(sysUser2);
         return ApiResult.ok();
     }
 }

@@ -21,7 +21,10 @@ spring:
       #connection-test-query: SELECT 1
   resources: classpath:/WEB-INF/resources/
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
   application:
     name: springboot
   aop:

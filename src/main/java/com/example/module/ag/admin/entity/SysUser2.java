@@ -7,11 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,13 +20,15 @@ import java.util.List;
  * @author lpfei
  * @since 2019-08-14
  */
+@Entity
+@Table(name = "sys_user2")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class SysUser2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @Id
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
@@ -41,10 +41,12 @@ public class SysUser2 implements Serializable {
     private String salt;
 
     private Integer state;//用户状态,0:创建未认证, 1:正常状态,2：用户被锁定.
-
-
-    @ManyToMany(fetch = FetchType.EAGER)//立即从数据库中进行加载数据;
-    @JoinTable(name = "SysUserRole2", joinColumns = {@JoinColumn(name = "id")}, inverseJoinColumns = {@JoinColumn(name = "roleId")})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)//CascadeType 级联操作权限
+    @JoinTable(
+            name = "sys_user_role2",//指定表名
+            joinColumns = {@JoinColumn(name = "uid", referencedColumnName = "id")},//指定主键
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}//指定主键
+    )
     @TableField(exist = false)
-    private List<SysRole2> roleList;// 一个用户具有多个角色
+    private List<SysRole2> roleList = new ArrayList<>();
 }

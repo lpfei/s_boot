@@ -8,11 +8,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,13 +21,15 @@ import java.util.List;
  * @author lpfei
  * @since 2019-08-14
  */
+@Entity
+@Table(name = "sys_role2")
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class SysRole2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
+    @Id
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
@@ -40,14 +40,23 @@ public class SysRole2 implements Serializable {
     private Long available;
 
     //角色 -- 权限关系：多对多关系;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "SysRolePermission2", joinColumns = {@JoinColumn(name = "roleId")}, inverseJoinColumns = {@JoinColumn(name = "permissionId")})
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "sys_role_permission2",
+            joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "permission_id", referencedColumnName = "id")}
+    )
     @TableField(exist = false)
-    private List<SysPermission2> permissions;
+    private List<SysPermission2> permissions = new ArrayList<>();
 
     // 用户 - 角色关系定义;
     @ManyToMany
-    @JoinTable(name = "SysUserRole2", joinColumns = {@JoinColumn(name = "roleId")}, inverseJoinColumns = {@JoinColumn(name = "id")})
+    @JoinTable(
+            name = "sys_user_role2",//指定表名
+            joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")},//指定主键
+            inverseJoinColumns = {@JoinColumn(name = "uid", referencedColumnName = "id")}//指定主键
+    )
     @TableField(exist = false)
-    private List<SysUser> userInfos;// 一个角色对应多个用户
+    private List<SysUser2> userInfos = new ArrayList<>();
+
 }
