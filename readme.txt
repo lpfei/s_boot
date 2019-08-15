@@ -16,3 +16,4 @@ cors
 swagger2
 web socket
 
+session redis
