@@ -131,13 +131,13 @@ public class DemoController {
 
     /**
      * pageheper test
+     *
      * @param pageNum
      * @param pageSize
      * @return
      */
     @PostMapping(value = "list")
     public Object list(Integer pageNum, Integer pageSize) {
-        apiUserService.test();
-        return ApiResult.ok();
+        return ApiResult.ok(apiUserService.test());
     }
 }

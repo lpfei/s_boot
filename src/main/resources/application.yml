@@ -53,7 +53,7 @@ pagehelper:
     helperDialect: mysql
     reasonable: true
     supportMethodsArguments:
-    pageSizeZero: true
+    pageSizeZero: false
     params: count=countSql
 #param
 app:
