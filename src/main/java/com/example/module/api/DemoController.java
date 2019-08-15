@@ -6,8 +6,10 @@ import com.example.module.ag.admin.entity.SysRole2;
 import com.example.module.ag.admin.entity.SysUser2;
 import com.example.module.ag.admin.service.SysRole2Service;
 import com.example.module.api.admin.JpaSysUser2Service;
+import com.example.module.api.user.service.ApiUserService;
 import com.example.module.model.compent.quartz.bean.OneJob;
 import com.example.module.model.params.req.Demo;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -120,6 +122,22 @@ public class DemoController {
 
         sysUser2.getRoleList().add(sysRole2);
         jpaSysUser2Service.save(sysUser2);
+        return ApiResult.ok();
+    }
+
+
+    @Autowired
+    private ApiUserService apiUserService;
+
+    /**
+     * pageheper test
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @PostMapping(value = "list")
+    public Object list(Integer pageNum, Integer pageSize) {
+        apiUserService.test();
         return ApiResult.ok();
     }
 }

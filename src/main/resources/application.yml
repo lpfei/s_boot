@@ -48,7 +48,13 @@ shiro:
   loginUrl:
     successUrl: /index
     unauthorizedUrl: /unauthorizedUrl
-
+#pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments:
+    pageSizeZero: true
+    params: count=countSql
 #param
 app:
   docDisabled: false

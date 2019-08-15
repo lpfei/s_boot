@@ -103,6 +103,14 @@ public class CodeGenerator {
                         + "/service/" + tableInfo.getEntityName() + "Service" + StringPool.DOT_JAVA;
             }
         });
+        focList.add(new FileOutConfig("/config/controller.java.btl") {
+            @Override
+            public String outputFile(TableInfo tableInfo) {
+                // 自定义输入文件名称
+                return projectPath + "/src/main/java/com/example/module/ag/" + pc.getModuleName()
+                        + "/controller/" + tableInfo.getEntityName() + "Controller" + StringPool.DOT_JAVA;
+            }
+        });
         cfg.setFileOutConfigList(focList);
         mpg.setCfg(cfg);
 
@@ -111,6 +119,7 @@ public class CodeGenerator {
         templateConfig.setXml(null);
         templateConfig.setServiceImpl(null);
         templateConfig.setService(null);
+        templateConfig.setController(null);
         mpg.setTemplate(templateConfig);
 
         // 策略配置
