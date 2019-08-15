@@ -8,8 +8,16 @@ import org.springframework.stereotype.Controller;
 #if(${superControllerClassPackage})
 import ${superControllerClassPackage};
 #end
+
+import com.example.core.result.ApiResult;
+import com.example.core.util.page.PageModel;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import ${package.Entity}.${entity};
 import ${package.Service}.${entity}Service;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * <p>
@@ -42,11 +50,11 @@ public class ${table.controllerName} {
      * 获取数据列表
      */
     @RequestMapping("/list")
-    @ResponseBody
-    public Object findListByPage(@RequestParam(name = "page", defaultValue = "1") int pageIndex,@RequestParam(name = "rows", defaultValue = "20") int step){
-        Page page = new Page(pageIndex,step);
-        targetService.selectPage(page);
-        return BaseResponse.onSuccess(page);
+    public Object findListByPage(Integer pageNum,Integer pageSize){
+        PageHelper.startPage(PageModel.init(pageNum,pageSize));
+        List<${entity}> list = ${entity}Service.list();
+        PageInfo<${entity}> pageInfo = new PageInfo<>(list);
+        return ApiResult.ok(pageInfo.getList());
     }
 
 }
