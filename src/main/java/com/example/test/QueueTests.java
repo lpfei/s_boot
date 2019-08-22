@@ -1,7 +1,7 @@
-package com.example;
+package com.example.test;
 
+import com.example.Application;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,13 +10,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * description:
+ * description:队列demo
  * Created by lpfei on 2019/8/21
  */
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ApplicationTests {
+public class QueueTests {
 
     private ConcurrentLinkedQueue<String> clq = new ConcurrentLinkedQueue<>();
 
