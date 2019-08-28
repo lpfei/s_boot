@@ -9,7 +9,7 @@ spring:
   datasource:
     #driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
-    url: jdbc:p6spy:mysql://39.97.225.44:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:p6spy:mysql://127.0.0.1:3306/ry?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
       username: java_usr
@@ -29,6 +29,13 @@ spring:
     name: springboot
   aop:
     proxy-target-class: true
+  # 配置ElasticSearch
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300
+      cluster-name: my-application
+      repositories:
+        enabled: true
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
