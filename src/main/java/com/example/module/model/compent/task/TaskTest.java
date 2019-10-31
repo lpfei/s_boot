@@ -5,13 +5,18 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
+ * 从配置文件获取定时任务执行配置
+ * app:
+ *  cron: '0/3 * * * * ?'
+ * @Scheduled(cron = "${app.cron}")
+ *
  * Created by lpfei on 2017/4/5.
  */
 @Service
 @Slf4j
 public class TaskTest {
 
-    //@Scheduled(fixedRate = 5000)
+//    @Scheduled(cron = "${app.cron}")
     public void print() {
         //计划执行
         log.info("每5秒钟执行一次........");
