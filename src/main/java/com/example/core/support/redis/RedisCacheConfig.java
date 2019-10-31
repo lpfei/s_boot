@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
@@ -39,7 +38,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
     public RedisCacheManager cacheManager(RedisConnectionFactory lettuceConnectionFactory) {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofHours(24))     // 默认缓存有效期24小时
-                .computePrefixWith(cacheName -> "shareBt".concat(":").concat(cacheName).concat(":"))    //设置key 前缀
+                .computePrefixWith(cacheName -> "shareBtCache".concat(":").concat(cacheName).concat(":"))    //设置key 前缀
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer()))  //key 序列化方式
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(valueSerializer()))  //value 序列化方式
                 .disableCachingNullValues();         //不换存null
@@ -63,8 +62,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         return new StringRedisSerializer();
     }
 
-    private RedisSerializer<Object> valueSerializer() {
-        //TODO::暂时还有问题未解决,返序列化时,jdk默认序列化方式可以正常使用
+    private RedisSerializer valueSerializer() {
         //使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
         Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper mapper = new ObjectMapper();
@@ -74,7 +72,7 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
         return serializer;
     }
 
-    @Bean
+    @Bean("customKeyGenerator")
     public KeyGenerator myKeyGenerator() {
         return new KeyGenerator() {
             @Override
@@ -92,8 +90,9 @@ public class RedisCacheConfig extends CachingConfigurerSupport {
                     }
                 }
                 log.info("redis cache key str: " + sb.toString());
-                log.info("redis cache key sha256Hex: " + DigestUtils.sha256Hex(sb.toString()));
-                return DigestUtils.sha256Hex(sb.toString());
+                return sb.toString();
+//                log.info("redis cache key sha256Hex: " + DigestUtils.sha256Hex(sb.toString()));
+//                return DigestUtils.sha256Hex(sb.toString());
             }
         };
     }
