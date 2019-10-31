@@ -2,6 +2,7 @@ package com.example.core.properties;
 
 import com.example.core.consts.AppConst;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -26,5 +27,16 @@ public class AppProperties {
 
     public AppProperties() throws IOException {
         Files.createDirectories(Paths.get(workDir));
+    }
+
+    /**
+     * 静态属性赋值
+     * 需要@Component + set@value
+     */
+    private static String env;
+
+    @Value("${spring.profiles.active}")
+    public void setEnv(String env) {
+        AppProperties.env = env;
     }
 }
