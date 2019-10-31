@@ -28,6 +28,11 @@ import java.util.Set;
 /**
  * spring redis缓存支持
  * Created by lpfei on 2017/3/29.
+ *
+ * 1.先设置cacheNames 后在Cacheable value中使用才会使用设置的配置
+ * 2.使用方式:spring 注解
+ * @Cacheable(value = "organization", keyGenerator = "customKeyGenerator")
+ *
  */
 @Slf4j
 @Configuration
