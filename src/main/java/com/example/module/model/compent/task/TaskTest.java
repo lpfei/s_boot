@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class TaskTest {
 
-//    @Scheduled(cron = "${app.cron}")
+    @Scheduled(cron = "${app.cron}")
     public void print() {
         //计划执行
         log.info("每5秒钟执行一次........");
